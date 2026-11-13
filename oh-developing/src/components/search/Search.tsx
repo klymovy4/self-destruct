@@ -5,13 +5,12 @@ import classes from './Search.module.scss'
 import ProductCard from '../productCard/ProductCard'
 import { useCategories } from '../../hooks/useCategories'
 import { useProductSearch } from '../../hooks/useProductSearch'
+import { useInfiniteScroll } from '../../hooks/useInfiniteScroll'
 
 export const Search = ({ section }: { section: string }) => {
   const [value, setValue] = useState('')
   const debouncedValue = useDebounce(value, 300)
   const [selectedCategory, setSelectedCategory] = useState<string>('')
-
-  const sentinelRef = useRef<HTMLDivElement>(null)
 
   const { categories, categoriesError } = useCategories(section)
   const { products, total, isLoading, error, hasMore, loadMore } = useProductSearch({
@@ -20,21 +19,10 @@ export const Search = ({ section }: { section: string }) => {
     category: selectedCategory,
   })
 
-  useEffect(() => {
-    const sentinel = sentinelRef.current
-    if (!sentinel || !hasMore || isLoading) return
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          loadMore()
-        }
-      },
-      { rootMargin: '200px' },
-    )
-    observer.observe(sentinel)
-    return () => observer.disconnect()
-  }, [hasMore, isLoading, loadMore])
+  const sentinelRef = useInfiniteScroll({
+    onLoadMore: loadMore,
+    enabled: hasMore && !isLoading,
+  })
 
   const filteredProducts = products.filter(
     (product) => !selectedCategory || product.category === selectedCategory,
