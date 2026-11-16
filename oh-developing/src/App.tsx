@@ -2,7 +2,8 @@ import './App.css'
 import { NavLink, Route, Routes } from 'react-router'
 import { Search } from './components/search/Search'
 import ItemList from './components/itemList/ItemList'
-import {SearchTanstack} from './components/searchTanstack/SearchTanStack'
+import { SearchTanstack } from './components/searchTanstack/SearchTanstack'
+import { SearchRtk } from './components/searchRtk/SearchRtk'
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
       <Routes>
         <Route path='/search' element={<Search section='products' />} />
         <Route path='/search-tanstack' element={<SearchTanstack section='products' />} />
-
+        <Route path='/search-rtkquery' element={<SearchRtk section='products' />} />
         <Route path='/todos' element={<ItemList />} />
         <Route path='*' element={<p>Page not found</p>} />
       </Routes>
