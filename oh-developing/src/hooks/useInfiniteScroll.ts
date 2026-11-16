@@ -15,10 +15,13 @@ export const useInfiniteScroll = ({
 
   useEffect(() => {
     const sentinel = ref.current
+
     if (!sentinel || !enabled) return
 
     const observer = new IntersectionObserver(
       (entries) => {
+        console.log('isIntersecting', entries[0].isIntersecting)
+
         if (entries[0].isIntersecting) {
           onLoadMore()
         }

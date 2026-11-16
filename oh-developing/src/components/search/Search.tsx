@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState } from 'react'
 import { useDebounce } from '../../hooks/useDebounce'
 
 import classes from './Search.module.scss'
@@ -30,6 +30,7 @@ export const Search = ({ section }: { section: string }) => {
 
   return (
     <div>
+      <h1>Test API</h1>
       <div className={classes.searchBlock}>
         <input
           aria-label='search goods'

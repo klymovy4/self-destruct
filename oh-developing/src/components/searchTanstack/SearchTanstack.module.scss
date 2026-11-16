@@ -1,0 +1,48 @@
+.searchWrapper {
+  height: 40rem;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid grey;
+  box-shadow: 0 0 0 0 rgba(10, 10, 10, 10);
+  overflow: auto;
+}
+
+.searchBlock {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+}
+
+.items {
+  display: flex;
+  padding: 0.5rem;
+  flex-wrap: wrap;
+  border: 1px solid grey;
+  gap: 0.5rem;
+
+  .item {
+    width: 20rem;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 1rem;
+
+    .image {
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+.noItems {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.ul {
+  border: 1px solid red;
+}
+
+.loading {
+  width: 5rem;
+}
