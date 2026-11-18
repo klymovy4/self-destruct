@@ -5,6 +5,7 @@ import ItemList from './components/itemList/ItemList'
 import { SearchTanstack } from './components/searchTanstack/SearchTanstack'
 import { SearchRtk } from './components/searchRtk/SearchRtk'
 import CategoryAccordion from './components/accordion/CategoryAccordion'
+import ProductDetails from './components/accordion/productDetails/ProductDetails'
 
 function App() {
   return (
@@ -22,7 +23,10 @@ function App() {
         <Route path='/search-tanstack' element={<SearchTanstack section='products' />} />
         <Route path='/search-rtkquery' element={<SearchRtk section='products' />} />
         <Route path='/todos' element={<ItemList />} />
-        <Route path='/accordion' element={<CategoryAccordion section='products' />} />
+        <Route path='/accordion' element={<CategoryAccordion />}>
+          <Route index element={<h2></h2>} />
+          <Route path=':productId' element={<ProductDetails />} />
+        </Route>
         <Route path='*' element={<p>Page not found</p>} />
       </Routes>
     </>

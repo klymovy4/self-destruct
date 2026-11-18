@@ -3,6 +3,7 @@ import classes from './CategoryAccordion.module.scss'
 import cx from 'clsx'
 import { useGetProductByCategoryQuery } from '../../api/productsApi'
 import { getErrorMessage } from '../../utils/getErrorMessage'
+import { NavLink } from 'react-router'
 
 type CategorySectionProps = {
   category: { name: string; slug: string }
@@ -44,19 +45,21 @@ const CategorySection = (props: CategorySectionProps) => {
             <ul className={classes.products}>
               {data.products.map((product) => {
                 return (
-                  <li key={product.id} className={classes.product}>
-                    <h4>Title: {product.title}</h4>
-                    <img
-                      loading='lazy'
-                      src={product.thumbnail}
-                      alt={product.title}
-                      width={130}
-                      height={130}
-                    />
-                    <div>
-                      <p className={classes.productTitle}>{product.title}</p>
-                      <p className={classes.productPrice}>Price: ${product.price}</p>
-                    </div>
+                  <li key={product.id}>
+                    <NavLink to={`${product.id}`} className={classes.product}>
+                      <h4>Title: {product.title}</h4>
+                      <img
+                        loading='lazy'
+                        src={product.thumbnail}
+                        alt={product.title}
+                        width={130}
+                        height={130}
+                      />
+                      <div>
+                        <p className={classes.productTitle}>{product.title}</p>
+                        <p className={classes.productPrice}>Price: ${product.price}</p>
+                      </div>
+                    </NavLink>
                   </li>
                 )
               })}

@@ -1,0 +1,10 @@
+.star {
+  position: relative;
+  display: inline-flex;
+}
+
+.fill {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}

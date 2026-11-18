@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import type { Category, ProductsResponse } from '../types/product'
+import type { Category, Product, ProductsResponse } from '../types/product'
 
 type SearchArgs = {
   section: string
@@ -38,6 +38,9 @@ export const productsApi = createApi({
     getProductByCategory: build.query<ProductsResponse, string>({
       query: (slug) => `products/category/${slug}`,
     }),
+    getProductById: build.query<Product, number>({
+      query: (id) => `products/${id}`,
+    }),
   }),
 })
 
@@ -45,4 +48,5 @@ export const {
   useSearchProductsInfiniteQuery,
   useGetCategoriesQuery,
   useGetProductByCategoryQuery,
+  useGetProductByIdQuery,
 } = productsApi
