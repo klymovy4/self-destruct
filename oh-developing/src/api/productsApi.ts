@@ -35,7 +35,14 @@ export const productsApi = createApi({
     getCategories: build.query<Category[], string>({
       query: (section) => `${section}/categories`,
     }),
+    getProductByCategory: build.query<ProductsResponse, string>({
+      query: (slug) => `products/category/${slug}`,
+    }),
   }),
 })
 
-export const { useSearchProductsInfiniteQuery, useGetCategoriesQuery } = productsApi
+export const {
+  useSearchProductsInfiniteQuery,
+  useGetCategoriesQuery,
+  useGetProductByCategoryQuery,
+} = productsApi

@@ -4,6 +4,7 @@ import { Search } from './components/search/Search'
 import ItemList from './components/itemList/ItemList'
 import { SearchTanstack } from './components/searchTanstack/SearchTanstack'
 import { SearchRtk } from './components/searchRtk/SearchRtk'
+import CategoryAccordion from './components/accordion/CategoryAccordion'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <NavLink to='/search-tanstack'>Search Tanstack</NavLink>
         <NavLink to='/search-rtkquery'>Search rtk-query</NavLink>
         <NavLink to='/todos'>Todos</NavLink>
+        <NavLink to='/accordion'>Accordion</NavLink>
       </nav>
 
       <Routes>
@@ -20,6 +22,7 @@ function App() {
         <Route path='/search-tanstack' element={<SearchTanstack section='products' />} />
         <Route path='/search-rtkquery' element={<SearchRtk section='products' />} />
         <Route path='/todos' element={<ItemList />} />
+        <Route path='/accordion' element={<CategoryAccordion section='products' />} />
         <Route path='*' element={<p>Page not found</p>} />
       </Routes>
     </>

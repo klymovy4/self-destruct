@@ -30,7 +30,7 @@ export const SearchTanstack = ({ section }: { section: string }) => {
 
   return (
     <div>
-      <h1>Test API</h1>
+      <h1>Test API TanStack</h1>
       <div className={classes.searchBlock}>
         <input
           aria-label='search goods'

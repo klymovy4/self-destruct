@@ -38,7 +38,7 @@ export const SearchRtk = ({ section }: { section: string }) => {
 
   return (
     <div>
-      <h1>Test API</h1>
+      <h1>Test API RTK Query</h1>
       <div className={classes.searchBlock}>
         <input
           aria-label='search goods'
