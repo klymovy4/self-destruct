@@ -1,7 +1,10 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { loadRatings } from './RatingStorage';
 
 type RatingState = Record<number, number>
-const initialState: RatingState = {}
+
+
+const initialState: RatingState = loadRatings()
 
 const ratingsSlice = createSlice({
   name: 'ratings',

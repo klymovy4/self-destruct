@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { productsApi } from './api/productsApi'
 import ratingsReducer from './feature/rating/RatingSlice'
+import { saveRatings } from './feature/rating/RatingStorage'
 
 export const store = configureStore({
   reducer: {
@@ -8,6 +9,10 @@ export const store = configureStore({
     ratings: ratingsReducer,
   },
   middleware: (getDefault) => getDefault().concat(productsApi.middleware),
+})
+
+store.subscribe(() => {
+  saveRatings(store.getState().ratings)
 })
 
 export type RootState = ReturnType<typeof store.getState>
