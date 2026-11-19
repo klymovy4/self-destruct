@@ -4,6 +4,7 @@ import cx from 'clsx'
 import { useGetProductByCategoryQuery } from '../../api/productsApi'
 import { getErrorMessage } from '../../utils/getErrorMessage'
 import { NavLink } from 'react-router'
+import StarRating from '../starRating/StarRating'
 
 type CategorySectionProps = {
   category: { name: string; slug: string }
@@ -58,6 +59,7 @@ const CategorySection = (props: CategorySectionProps) => {
                       <div>
                         <p className={classes.productTitle}>{product.title}</p>
                         <p className={classes.productPrice}>Price: ${product.price}</p>
+                        <StarRating rating={product.rating} size={15} />
                       </div>
                     </NavLink>
                   </li>

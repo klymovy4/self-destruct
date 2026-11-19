@@ -3,16 +3,22 @@ import { useGetProductByIdQuery } from '../../../api/productsApi'
 import { getErrorMessage } from '../../../utils/getErrorMessage'
 import { skipToken } from '@reduxjs/toolkit/query/react'
 import classes from './ProductDetails.module.scss'
-import StarRating from '../../starRating/StarRating'
+import RatingInput from '../../ratingInput/RatingInput'
+import { useState } from 'react'
 
 const ProductDetails = () => {
   const { productId } = useParams()
   const id = Number(productId)
   const isValidId = Number.isInteger(id) && id > 0
+  const [myRatings, setMyRatings] = useState<Record<number, number>>({})
 
   const { currentData, isFetching, error } = useGetProductByIdQuery(isValidId ? id : skipToken)
 
   const errorMessage = getErrorMessage(error)
+
+  const changeRating = (value: number) => {
+    setMyRatings((prev) => ({ ...prev, [id]: value }))
+  }
 
   if (!isValidId) return <p>Product not found</p>
   if (isFetching && !currentData) return <p>Loading...</p>
@@ -30,8 +36,16 @@ const ProductDetails = () => {
       <p>
         <b>Description:</b> {currentData.description}
       </p>
+      <p>
+        <b>Rating: {currentData.rating}</b>
+      </p>
 
-      <StarRating rating={currentData.rating} />
+      <RatingInput
+        name={`rating-${currentData.id}`}
+        size={21}
+        value={myRatings[currentData.id] ?? 0}
+        onChange={changeRating}
+      />
     </article>
   )
 }
