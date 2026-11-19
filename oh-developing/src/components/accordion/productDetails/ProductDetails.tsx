@@ -4,20 +4,23 @@ import { getErrorMessage } from '../../../utils/getErrorMessage'
 import { skipToken } from '@reduxjs/toolkit/query/react'
 import classes from './ProductDetails.module.scss'
 import RatingInput from '../../ratingInput/RatingInput'
-import { useState } from 'react'
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
+import { rated } from '../../../feature/rating/RatingSlice'
 
 const ProductDetails = () => {
+  const dispatch = useAppDispatch()
+
   const { productId } = useParams()
   const id = Number(productId)
   const isValidId = Number.isInteger(id) && id > 0
-  const [myRatings, setMyRatings] = useState<Record<number, number>>({})
+  const myRating = useAppSelector((state) => state.ratings[id] ?? 0)
 
   const { currentData, isFetching, error } = useGetProductByIdQuery(isValidId ? id : skipToken)
 
   const errorMessage = getErrorMessage(error)
 
   const changeRating = (value: number) => {
-    setMyRatings((prev) => ({ ...prev, [id]: value }))
+    dispatch(rated({ productId: id, rating: value }))
   }
 
   if (!isValidId) return <p>Product not found</p>
@@ -43,7 +46,7 @@ const ProductDetails = () => {
       <RatingInput
         name={`rating-${currentData.id}`}
         size={21}
-        value={myRatings[currentData.id] ?? 0}
+        value={myRating}
         onChange={changeRating}
       />
     </article>
