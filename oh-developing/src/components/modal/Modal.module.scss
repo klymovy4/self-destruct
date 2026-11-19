@@ -1,0 +1,46 @@
+.modal {
+  width: min(90vw, 50rem);
+  max-height: 90vh;
+  padding: 0;
+  border: none;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+
+  &::backdrop {
+    background: rgba(0, 0, 0, 0.6);
+  }
+}
+
+.content {
+  position: relative;
+  padding: 1.5rem;
+  max-height: 90vh;
+  overflow-y: auto;
+
+  img {
+    width: 100%;
+  }
+}
+
+.close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  border: none;
+  background: transparent;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  transition: 0.3s ease transform;
+
+  &:hover {
+    transform: scale(1.3);
+    transition: 0.3s ease transform;
+  }
+
+  &:focus-visible {
+    outline: 2px solid royalblue;
+    outline-offset: 2px;
+  }
+}

@@ -12,6 +12,7 @@ export type Product = {
   category: string
   description: string
   brand?: string
+  images: string[]
 }
 
 export type ProductsResponse = {

@@ -6,13 +6,17 @@ import classes from './ProductDetails.module.scss'
 import RatingInput from '../../ratingInput/RatingInput'
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
 import { rated } from '../../../feature/rating/RatingSlice'
+import { useState } from 'react'
+import Modal from '../../modal/Modal'
 
 const ProductDetails = () => {
   const dispatch = useAppDispatch()
-
   const { productId } = useParams()
+
+  const [isOpen, setIsOpen] = useState(false)
   const id = Number(productId)
   const isValidId = Number.isInteger(id) && id > 0
+
   const myRating = useAppSelector((state) => state.ratings[id] ?? 0)
 
   const { currentData, isFetching, error } = useGetProductByIdQuery(isValidId ? id : skipToken)
@@ -31,7 +35,9 @@ const ProductDetails = () => {
   return (
     <article className={classes.detailCard}>
       <h2>{currentData.title}</h2>
-      <img src={currentData.thumbnail} alt={currentData.title} width={200} />
+      <button onClick={() => setIsOpen(true)}>
+        <img src={currentData.thumbnail} alt={`Open gallery: ${currentData.title}`} width={200} />
+      </button>
       <p>
         <b>Price: $</b>
         {currentData.price}
@@ -49,6 +55,15 @@ const ProductDetails = () => {
         value={myRating}
         onChange={changeRating}
       />
+
+      <Modal
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        images={currentData.images}
+        title={currentData.title}
+      >
+        <img src={currentData.images[0]} alt={currentData.title} />
+      </Modal>
     </article>
   )
 }
